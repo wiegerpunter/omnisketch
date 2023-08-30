@@ -1,5 +1,5 @@
-# omnisketch
-Omnisketch code for VLDB2024 Submission
+# OmniSketch
+OmniSketch code for VLDB2024 Submission
 
 Requirements:
   - maven

@@ -138,16 +138,16 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
         }
     }
     */
-    //public void updateOne(String key, String value) {
-    public void updateOne(String sp, String key, String value) {
+    public void updateOne(String key, String value) {
+    //public void updateOne(String sp, String key, String value) {
         /*if (spark_init) {
             spark_init = false;
             init_hydra_struct();
         }*/
 
         // calculate CS position
-        String insert = sp + "-" + key + ":" + value;
-        //String insert = key + ":" + value;
+        //String insert = sp + "-" + key + ":" + value;
+        String insert = key + ":" + value;
         byte[] byte_kv = utils.StringToByte(insert);
         long hash_kv_long = hashFunc.hash(byte_kv, 0, byte_kv.length, um_seed);
         int[] hash_kv = utils.getHashArray(hash_kv_long);
@@ -161,8 +161,8 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
         // current only support level <= 17
         //int bottom_layer_num = ImpUnivMonStruct.findBottomLayerNum(hash_kv[3], levels);
 
-        //byte[] byte_key = utils.StringToByte(key);
-        byte[] byte_key = utils.StringToByte(sp);
+        byte[] byte_key = utils.StringToByte(key);
+        //byte[] byte_key = utils.StringToByte(sp);
         long hash_key_long = hashFunc.hash(byte_key, 0, byte_key.length, hs_seed);
         int[] hash_key = utils.getHashArray(hash_key_long);
 
@@ -191,14 +191,14 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
         }
     }
 
-    //public float[] queryOneNoCheck(String key) {
-    public float[] queryOneNoCheck(String sp, String key) {
+    public float[] queryOneNoCheck(String key) {
+    //public float[] queryOneNoCheck(String sp, String key) {
         float[] l1_list = new float[d];
         //float[] entropy_list = new float[d];
         //float[] l2_list = new float[d];
         //float[] card_list = new float[d];
-        //byte[] byte_key = utils.StringToByte(key);
-        byte[] byte_key = utils.StringToByte(sp);
+        byte[] byte_key = utils.StringToByte(key);
+        //byte[] byte_key = utils.StringToByte(sp);
         long hash_key_long = hashFunc.hash(byte_key, 0, byte_key.length, hs_seed);
         int[] hash_key = utils.getHashArray(hash_key_long);
 
@@ -217,7 +217,7 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
                 //l2_list[i] = tmp_l2;
                 //card_list[i] = tmp_card;
             }*/
-            byte[] byte_kv = utils.StringToByte(sp + "-" + key + ":1");
+            byte[] byte_kv = utils.StringToByte(key + ":1");
             long hash_kv_long = hashFunc.hash(byte_kv, 0, byte_kv.length, um_seed);
             int[] hash_kv = utils.getHashArray(hash_kv_long);
             int[] pos = new int[numRows];
@@ -478,11 +478,11 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
                 if (subpop.contains(i))
                     key.append(rec[i]);
             }
-            //String insert = sp + "-" + key;
+            String insert = sp + "-" + key;
             totalAdded++;
-            String keyString = String.valueOf(key);
-            updateOne(Integer.toString(sp), keyString, "1");
-            //updateOne(insert, "1");
+            //String keyString = String.valueOf(key);
+            //updateOne(Integer.toString(sp), keyString, "1");
+            updateOne(insert, "1");
         }
 
     }
@@ -499,9 +499,9 @@ public class ImpHydraStruct extends Synopsis implements Serializable {
         }
         int subPop = subPopMap.getSubPop(attrsIdx);
         String insert = subPop + "-" + value;
-        //float[] ret = queryOneNoCheck(insert);
-        String key = String.valueOf(value);
-        float[] ret = queryOneNoCheck(Integer.toString(subPop), key);
+        float[] ret = queryOneNoCheck(insert);
+        //String key = String.valueOf(value);
+        //float[] ret = queryOneNoCheck(Integer.toString(subPop), key);
         return (int) ret[0];
     }
 

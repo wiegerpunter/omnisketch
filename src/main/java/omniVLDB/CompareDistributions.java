@@ -22,6 +22,7 @@ public class CompareDistributions {
     }
 
     public void run() throws IOException, CsvValidationException {
+        Main.sensitivityAnalysis = true;
         //String[] datasets = new String[]{"CAIDA", "SNMP", "synthzipf1-2", "synthzipf1-5","synthzipf2"};//"synth3zipf", "synthUniform", "synthDiffAlphas", "CAIDA", "SNMP"};
         String[] datasets = new String[]{"CAIDA", "SNMP", "synthzipf1-3", "synthzipf1-5", "synthzipf1", "synthUniform"};
         Main.createNewWorkload = true;

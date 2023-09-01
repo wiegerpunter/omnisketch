@@ -32,7 +32,13 @@ Datasets:
 Queries:
 - Generate point queries by setting Main.createNewWorkload = true;
 - Generate range queries by setting Main.createNewRangeWorkload = true;
+- Not all attributes are appropriate for queries. These are automatically checked in the generation process by function AttributeStats.dontIncludeAttribute(). See line 83 in AttributeStats for more info.
 
 After creating a new workload, check the queries and look which attribute combinations are most frequent. This is important for experiments that check for different numbers of stored attributes, see line 75 in CompareBaselines.java. Every iteration, we want to add an attribute that brings new queries combined with the existing attributes. For our workload, the right order of attributes was [12, 14, 11, 1, 5, 13, 9, 8, 10, 21, 15], because 12&14 had the most queries.
 
+
+Hydra code:
+We needed to make a few changes to the Hydra, to make it compatible with our experiments:
+- We deleted irrelevant classes to minimize Hydra's memory utilization for our setting of estimating L1-norm.
+- We computed subpopulations for every record and added it in the right places to the sketch, as this was described in their paper but not included in the code. We assumed their data was already preprocessed for this.
 For original Hydra code, see https://github.com/antonis-m/HYDRA_VLDB

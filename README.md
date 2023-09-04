@@ -1,4 +1,4 @@
-![image](https://github.com/wiegerpunter/omnisketch/assets/33684858/6752a19f-a117-4c01-b3b4-888e00d2156c)![image](https://github.com/wiegerpunter/omnisketch/assets/33684858/8e7e9fd1-edd5-4527-abbe-37dbfa93980e)# OmniSketch
+# OmniSketch
 OmniSketch code for VLDB2024 Submission
 
 Requirements:
